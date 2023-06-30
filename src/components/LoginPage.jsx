@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { useLocalStorage } from "react-use";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const LoginPage = () => {
   });
 
   const navigate = useNavigate();
+
+  const [token, setToken] = useLocalStorage("token", "");
 
   const handleChange = (event) => {
     setFormData({
@@ -33,7 +36,7 @@ const LoginPage = () => {
       if (response.ok) {
         let data = await response.json();
         console.log("Login successful" + data.accessToken);
-        window.localStorage.setItem("token", data.accessToken);
+        setToken(data.accessToken);
         navigate("/home");
       } else {
         console.log("Login failed");
@@ -52,34 +55,30 @@ const LoginPage = () => {
           <h1 className="my-3 text-primary text-center">LOGIN</h1>
           <form onSubmit={handleSubmit}>
             <div className="user-box">
-            <input
-  type="text"
-  name="userName" // Aggiungi il nome del campo come "userName"
-  required
-  value={formData.userName}
-  onChange={handleChange}
-/>
+              <input
+                type="text"
+                name="userName" // Aggiungi il nome del campo come "userName"
+                required
+                value={formData.userName}
+                onChange={handleChange}
+              />
               <label>Username</label>
             </div>
             <div className="user-box">
-            <input
-  type="password"
-  name="password" // Aggiungi il nome del campo come "password"
-  required
-  value={formData.password}
-  onChange={handleChange}
-/>
+              <input
+                type="password"
+                name="password" // Aggiungi il nome del campo come "password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+              />
               <label>Password</label>
             </div>
             <center>
               <Link to={"/home"} type="submit" className="color-white">
-              <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    LOGIN
-                  </Button>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                  LOGIN
+                </Button>
               </Link>
             </center>
           </form>

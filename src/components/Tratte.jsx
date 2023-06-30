@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Modal, Button, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import newyork from "../IMAGE/ny.jpeg";
 import roma from "../IMAGE/roma.jpeg";
 import parigi from "../IMAGE/parigi.jpeg";
@@ -15,25 +16,61 @@ function ImageAndTextExample() {
   const [endDate, setEndDate] = useState(null);
   const [departure, setDeparture] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [baggage, setBaggage] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    function getRandomLetter() {
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const randomIndex = Math.floor(Math.random() * alphabet.length);
+      return alphabet[randomIndex];
+    }
+
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateTicketNumber() {
+      let ticketNumber = "";
+
+      // Genera 3 cifre casuali
+      for (let i = 0; i < 3; i++) {
+        const randomDigit = getRandomNumber(0, 9);
+        ticketNumber += randomDigit;
+      }
+
+      // Genera 3 lettere casuali
+      for (let i = 0; i < 3; i++) {
+        const randomLetter = getRandomLetter();
+        ticketNumber += randomLetter;
+      }
+
+      return ticketNumber;
+    }
+
+    const ticketNumber = generateTicketNumber();
+    console.log("Numero biglietto generato:", ticketNumber);
+
     try {
-      const response = await fetch("http://localhost:8080/price", {
+      const response = await fetch("http://localhost:8080/api/auth/biglietti", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          departure: departure,
-          destination: "New York",
+          username: "test",
+          dataAndata: startDate.toISOString().substring(0, 10),
+          dataRitorno: endDate.toISOString().substring(0, 10),
+          partenza: departure,
+          arrivo: selectedCity,
+          bagagli: baggage ? "BAGAGLIO_SI" : "BAGAGLIO_NO",
+          numeroBiglietto: ticketNumber,
         }),
       });
-  
+
       if (response.ok) {
-        const data = await response.json();
-        console.log("Prezzo dei biglietti Roma-New York:", data.price);
+        console.log("Biglietto creato con successo.");
       } else {
         console.log("Errore nella richiesta");
       }
@@ -63,10 +100,19 @@ function ImageAndTextExample() {
     setDeparture(event.target.value);
   };
 
+  const handleBaggageChange = (event) => {
+    setBaggage(event.target.value === "yes");
+  };
+
+  const getCities = () => {
+    const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
+    return cities.filter((city) => city !== selectedCity);
+  };
+
   return (
     <>
       <h1 className="text-center mt-5 title fw-bold">
-        <div class="image-container">
+        <div className="image-container">
           <img src={immagine} alt="" width={"75px"} className="air mt-2" />
         </div>
         <span className="caption">LE NOSTRE TRATTE</span>
@@ -162,7 +208,7 @@ function ImageAndTextExample() {
           <Modal.Title>Prenota un volo per {selectedCity}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Group>
               <Form.Label>Luogo di partenza</Form.Label>
               <Form.Control
@@ -172,35 +218,66 @@ function ImageAndTextExample() {
                 onChange={handleDepartureChange}
               >
                 <option value="">Seleziona luogo di partenza</option>
-                <option value="Roma">Roma</option>
-                <option value="Londra">Londra</option>
-                <option value="Parigi">Parigi</option>
-                <option value="Tokyo">Tokyo</option>
+                {getCities().map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
-
-            <DatePicker
-              selected={startDate}
-              onChange={handleDateChange}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              placeholderText="Data di partenza"
-              className="mt-3 border border-primary"
-            />
-            <DatePicker
-              selected={endDate}
-              onChange={handleEndDateChange}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              placeholderText="Data di ritorno"
-              minDate={startDate}
-              className="mt-3 border border-primary mx-4"
-            />
-
-            <Button variant="primary" className="mt-3" type="submit">
-              Conferma
+            <Form.Group>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value="test" // Aggiungi qui il valore appropriato per l'username
+                className="border border-primary rounded-0"
+                disabled
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Data di partenza</Form.Label>
+              <br />
+              <DatePicker
+                selected={startDate}
+                onChange={handleDateChange}
+                className="border border-primary rounded-0"
+                dateFormat="dd/MM/yyyy"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Data di ritorno</Form.Label>
+              <br />
+              <DatePicker
+                selected={endDate}
+                onChange={handleEndDateChange}
+                className="border border-primary rounded-0"
+                dateFormat="dd/MM/yyyy"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Bagaglio</Form.Label>
+              <br />
+              <Form.Check
+                inline
+                label="Si"
+                type="radio"
+                name="baggage"
+                value="yes"
+                checked={baggage === true}
+                onChange={handleBaggageChange}
+              />
+              <Form.Check
+                inline
+                label="No"
+                type="radio"
+                name="baggage"
+                value="no"
+                checked={baggage === false}
+                onChange={handleBaggageChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Prenota
             </Button>
           </Form>
         </Modal.Body>

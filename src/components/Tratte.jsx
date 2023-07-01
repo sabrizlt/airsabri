@@ -12,13 +12,41 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [departure, setDeparture] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [baggage, setBaggage] = useState(false);
+  const [cardHolder, setCardHolder] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState(null);
+  const [cvv, setCVV] = useState("");
+  const [ticketNumber, setTicketNumber] = useState("");
+  const [createdTicket, setCreatedTicket] = useState(null);
+  const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
 
-  const handleFormSubmit = async (event) => {
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleDepartureChange = (event) => {
+    setDeparture(event.target.value);
+  };
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  const handleBaggageChange = (event) => {
+    setBaggage(event.target.value === "yes");
+  };
+
+  const handleFormSubmit = (event) => {
     event.preventDefault();
 
     function getRandomLetter() {
@@ -49,8 +77,32 @@ function ImageAndTextExample() {
       return ticketNumber;
     }
 
-    const ticketNumber = generateTicketNumber();
-    console.log("Numero biglietto generato:", ticketNumber);
+    const getCities = () => {
+      const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
+      return cities.filter((city) => city !== selectedCity);
+    };
+
+    const ticket = {
+      startDate: startDate.toISOString().substring(0, 10),
+      endDate: endDate.toISOString().substring(0, 10),
+      departure,
+      selectedCity,
+      baggage,
+      ticketNumber: generateTicketNumber(),
+    };
+
+    setCreatedTicket(ticket);
+    setShowModal(false);
+    setShowPaymentModal(true);
+  };
+
+  const handlePaymentSubmit = async (event) => {
+    event.preventDefault();
+
+    const getCities = () => {
+      const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
+      return cities.filter((city) => city !== selectedCity);
+    };
 
     try {
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
@@ -60,53 +112,36 @@ function ImageAndTextExample() {
         },
         body: JSON.stringify({
           username: "test",
-          dataAndata: startDate.toISOString().substring(0, 10),
-          dataRitorno: endDate.toISOString().substring(0, 10),
-          partenza: departure,
-          arrivo: selectedCity,
-          bagagli: baggage ? "BAGAGLIO_SI" : "BAGAGLIO_NO",
-          numeroBiglietto: ticketNumber,
+          dataAndata: createdTicket.startDate,
+          dataRitorno: createdTicket.endDate,
+          partenza: createdTicket.departure,
+          arrivo: createdTicket.selectedCity,
+          bagagli: createdTicket.baggage ? "BAGAGLIO_SI" : "BAGAGLIO_NO",
+          numeroBiglietto: createdTicket.ticketNumber,
         }),
       });
 
       if (response.ok) {
-        console.log("Biglietto creato con successo.");
+        console.log("Biglietto inserito nel database con successo.");
+        alert(
+          "Biglietto creato e inserito nel database. Numero Biglietto: " +
+            createdTicket.ticketNumber
+        );
+        setCardHolder("");
+        setCardNumber("");
+        setExpirationDate(null);
+        setCVV("");
+        setTicketNumber("");
+        setCreatedTicket(null);
+        setShowPaymentModal(false);
       } else {
-        console.log("Errore nella richiesta");
+        console.log("Errore durante l'inserimento del biglietto nel database.");
+        alert("Errore durante l'inserimento del biglietto nel database.");
       }
     } catch (error) {
-      console.log("Errore nella richiesta:", error);
+      console.log("Errore durante la creazione del biglietto:", error);
+      alert("Errore durante la creazione del biglietto.");
     }
-  };
-
-  const handleModalOpen = (city) => {
-    setSelectedCity(city);
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
-  const handleDateChange = (date) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
-
-  const handleDepartureChange = (event) => {
-    setDeparture(event.target.value);
-  };
-
-  const handleBaggageChange = (event) => {
-    setBaggage(event.target.value === "yes");
-  };
-
-  const getCities = () => {
-    const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
-    return cities.filter((city) => city !== selectedCity);
   };
 
   return (
@@ -120,7 +155,10 @@ function ImageAndTextExample() {
 
       <Card
         className="w-75 mx-auto mt-5 tratteCard"
-        onClick={() => handleModalOpen("New York")}
+        onClick={() => {
+          setSelectedCity("NEW YORK");
+          setShowModal(true);
+        }}
       >
         <Card.Img
           variant="top"
@@ -134,10 +172,14 @@ function ImageAndTextExample() {
           </Card.Title>
         </Card.ImgOverlay>
       </Card>
+
       <br />
       <Card
         className="w-75 mx-auto mt-5 tratteCard"
-        onClick={() => handleModalOpen("Roma")}
+        onClick={() => {
+          setSelectedCity("ROMA");
+          setShowModal(true);
+        }}
       >
         <Card.Img
           variant="top"
@@ -154,7 +196,10 @@ function ImageAndTextExample() {
       <br />
       <Card
         className="w-75 mx-auto mt-5 tratteCard"
-        onClick={() => handleModalOpen("Parigi")}
+        onClick={() => {
+          setSelectedCity("PARIGI");
+          setShowModal(true);
+        }}
       >
         <Card.Img
           variant="top"
@@ -171,7 +216,10 @@ function ImageAndTextExample() {
       <br />
       <Card
         className="w-75 mx-auto mt-5 tratteCard"
-        onClick={() => handleModalOpen("Tokyo")}
+        onClick={() => {
+          setSelectedCity("TOKYO");
+          setShowModal(true);
+        }}
       >
         <Card.Img
           variant="top"
@@ -188,7 +236,10 @@ function ImageAndTextExample() {
       <br />
       <Card
         className="w-75 mx-auto mt-5 mb-5 tratteCard"
-        onClick={() => handleModalOpen("Londra")}
+        onClick={() => {
+          setSelectedCity("LONDRA");
+          setShowModal(true);
+        }}
       >
         <Card.Img
           variant="top"
@@ -218,11 +269,13 @@ function ImageAndTextExample() {
                 onChange={handleDepartureChange}
               >
                 <option value="">Seleziona luogo di partenza</option>
-                {getCities().map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
+                {cities
+                  .filter((city) => city !== departure) // Filter out the selected destination city
+                  .map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
               </Form.Control>
             </Form.Group>
             <Form.Group>
@@ -278,6 +331,60 @@ function ImageAndTextExample() {
             </Form.Group>
             <Button variant="primary" type="submit">
               Prenota
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showPaymentModal} onHide={() => setShowPaymentModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Effettua il pagamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handlePaymentSubmit}>
+            <Form.Group controlId="formCardHolder">
+              <Form.Label>Intestatario della carta</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci il nome dell'intestatario"
+                value={cardHolder}
+                onChange={(event) => setCardHolder(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formCardNumber">
+              <Form.Label>Numero di carta</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci il numero di carta"
+                value={cardNumber}
+                onChange={(event) => setCardNumber(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formExpirationDate">
+              <Form.Label>Data di scadenza</Form.Label>
+              <DatePicker
+                selected={expirationDate}
+                onChange={(date) => setExpirationDate(date)}
+                dateFormat="MM/yyyy"
+                showMonthYearPicker
+                className="form-control"
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formCVV">
+              <Form.Label>CVV</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci il codice di sicurezza"
+                value={cvv}
+                onChange={(event) => setCVV(event.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Paga
             </Button>
           </Form>
         </Modal.Body>

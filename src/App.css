@@ -207,7 +207,7 @@ div.carousel-indicators {
 .list-home {
     box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
     font-family: 'Russo One', sans-serif;
-    border: 2px solid rgb(0, 98, 255) !important;
+    border: 1px solid rgba(0, 0, 0, 0.393)!important;
 }
 
 .text-list:hover {

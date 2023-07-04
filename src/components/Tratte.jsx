@@ -111,7 +111,7 @@ function ImageAndTextExample() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "test",
+          username: "szaltni",
           dataAndata: createdTicket.startDate,
           dataRitorno: createdTicket.endDate,
           partenza: createdTicket.departure,
@@ -124,7 +124,7 @@ function ImageAndTextExample() {
       if (response.ok) {
         console.log("Biglietto inserito nel database con successo.");
         alert(
-          "Biglietto creato e inserito nel database. Numero Biglietto: " +
+          "Biglietto acquistato con successo. Numero Biglietto: " +
             createdTicket.ticketNumber
         );
         setCardHolder("");
@@ -136,7 +136,7 @@ function ImageAndTextExample() {
         setShowPaymentModal(false);
       } else {
         console.log("Errore durante l'inserimento del biglietto nel database.");
-        alert("Errore durante l'inserimento del biglietto nel database.");
+        alert("Errore durante l'acquisto del biglietto.");
       }
     } catch (error) {
       console.log("Errore durante la creazione del biglietto:", error);
@@ -282,11 +282,12 @@ function ImageAndTextExample() {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                value="test" // Aggiungi qui il valore appropriato per l'username
+                value="" // Aggiungi qui il valore appropriato per l'username
                 className="border border-primary rounded-0"
                 disabled
               />
             </Form.Group>
+            <div className="d-flex mt-2">
             <Form.Group>
               <Form.Label>Data di partenza</Form.Label>
               <br />
@@ -297,7 +298,7 @@ function ImageAndTextExample() {
                 dateFormat="dd/MM/yyyy"
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mx-5">
               <Form.Label>Data di ritorno</Form.Label>
               <br />
               <DatePicker
@@ -307,6 +308,7 @@ function ImageAndTextExample() {
                 dateFormat="dd/MM/yyyy"
               />
             </Form.Group>
+            </div>
             <Form.Group>
               <Form.Label>Bagaglio</Form.Label>
               <br />

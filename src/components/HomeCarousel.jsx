@@ -3,7 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 function CarouselFadeExample() {
   return (
-    <Carousel fade className="w-100 mx-auto mt-5 mb-5 carousel-home">
+    <Carousel fade className="w-100 mx-auto mt-5 mb-5 carousel-home" nextIcon={null} prevIcon={null}>
       <Carousel.Item>
         <div className="video-container">
           <iframe

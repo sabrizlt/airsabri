@@ -22,7 +22,7 @@ function Example() {
         <Navbar.Brand as={Link} to="/Home">
         <img src={LogoImage} width="80px" alt="" />
       </Navbar.Brand>
-          <Navbar.Text as={Link} to="/Tratte" className='textLogo fs-2 fw-bold text-decoration-none'>AIR SABRI</Navbar.Text>
+          <Navbar.Text className='textLogo fs-2 fw-bold text-decoration-none'>AIR SABRI</Navbar.Text>
         </div>
         <div className="ms-auto">
           <Button variant="light" onClick={handleShow}>

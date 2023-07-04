@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import OpeningPage from "./components/OpeningPage";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
+import PaginaRivista from "./components/PaginaRivista";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login-page" element={<LoginPage />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Tratte" element={<PaginaTratte />} />
+          <Route path="/Rivista" element={<PaginaRivista />} />
         </Routes>
       </Router>
     </div>

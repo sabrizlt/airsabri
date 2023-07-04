@@ -23,8 +23,10 @@ function ImageAndTextExample() {
   const [expirationDate, setExpirationDate] = useState(null);
   const [cvv, setCVV] = useState("");
   const [ticketNumber, setTicketNumber] = useState("");
-  const [createdTicket, setCreatedTicket] = useState(null);
+  const [postoNumber, setPostoNumber] = useState("");
   const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
+
+  
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -49,38 +51,34 @@ function ImageAndTextExample() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    function getRandomLetter() {
-      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      const randomIndex = Math.floor(Math.random() * alphabet.length);
-      return alphabet[randomIndex];
-    }
+    const generatePostoNumber = () => {
+      const randomDigit = getRandomNumber(1, 180); 
+      return `A${randomDigit}`;
+    };
 
-    function getRandomNumber(min, max) {
+    const getRandomNumber = (min, max) => {
       return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    };
 
-    function generateTicketNumber() {
+    const generateTicketNumber = () => {
       let ticketNumber = "";
-
+    
       // Genera 3 cifre casuali
       for (let i = 0; i < 3; i++) {
         const randomDigit = getRandomNumber(0, 9);
         ticketNumber += randomDigit;
       }
-
+    
       // Genera 3 lettere casuali
       for (let i = 0; i < 3; i++) {
-        const randomLetter = getRandomLetter();
+        const randomIndex = getRandomNumber(0, 25);
+        const randomLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[randomIndex];
         ticketNumber += randomLetter;
       }
-
+    
       return ticketNumber;
-    }
-
-    const getCities = () => {
-      const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
-      return cities.filter((city) => city !== selectedCity);
     };
+    
 
     const ticket = {
       startDate: startDate.toISOString().substring(0, 10),
@@ -89,20 +87,17 @@ function ImageAndTextExample() {
       selectedCity,
       baggage,
       ticketNumber: generateTicketNumber(),
+      postoNumber: generatePostoNumber(),
     };
 
-    setCreatedTicket(ticket);
+    setTicketNumber(ticket.ticketNumber);
+    setPostoNumber(ticket.postoNumber);
     setShowModal(false);
     setShowPaymentModal(true);
   };
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
-
-    const getCities = () => {
-      const cities = ["Roma", "Londra", "Parigi", "Tokyo", "New York"];
-      return cities.filter((city) => city !== selectedCity);
-    };
 
     try {
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
@@ -112,12 +107,13 @@ function ImageAndTextExample() {
         },
         body: JSON.stringify({
           username: "szaltni",
-          dataAndata: createdTicket.startDate,
-          dataRitorno: createdTicket.endDate,
-          partenza: createdTicket.departure,
-          arrivo: createdTicket.selectedCity,
-          bagagli: createdTicket.baggage ? "BAGAGLIO_SI" : "BAGAGLIO_NO",
-          numeroBiglietto: createdTicket.ticketNumber,
+          dataAndata: startDate.toISOString().substring(0, 10),
+          dataRitorno: endDate.toISOString().substring(0, 10),
+          partenza: departure,
+          arrivo: selectedCity,
+          bagagli: baggage ? "BAGAGLIO_SI" : "BAGAGLIO_NO",
+          numeroBiglietto: ticketNumber,
+          numeroPosto: postoNumber,
         }),
       });
 
@@ -125,14 +121,14 @@ function ImageAndTextExample() {
         console.log("Biglietto inserito nel database con successo.");
         alert(
           "Biglietto acquistato con successo. Numero Biglietto: " +
-            createdTicket.ticketNumber
+            ticketNumber
         );
         setCardHolder("");
         setCardNumber("");
         setExpirationDate(null);
         setCVV("");
         setTicketNumber("");
-        setCreatedTicket(null);
+        setPostoNumber("");
         setShowPaymentModal(false);
       } else {
         console.log("Errore durante l'inserimento del biglietto nel database.");
@@ -143,6 +139,7 @@ function ImageAndTextExample() {
       alert("Errore durante la creazione del biglietto.");
     }
   };
+
 
   return (
     <>
@@ -331,6 +328,7 @@ function ImageAndTextExample() {
                 onChange={handleBaggageChange}
               />
             </Form.Group>
+            
             <Button variant="primary" type="submit">
               Prenota
             </Button>

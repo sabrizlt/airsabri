@@ -8,7 +8,7 @@ import parigi from "../IMAGE/parigi.jpeg";
 import tokyo from "../IMAGE/tokyo.jpeg";
 import londra from "../IMAGE/londra.jpeg";
 import immagine from "../IMAGE/aereo.PNG";
-import { addDays, isAfter } from "date-fns";
+import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
 function ImageAndTextExample() {
@@ -25,6 +25,7 @@ function ImageAndTextExample() {
   const [cvv, setCVV] = useState("");
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
+  const priceBaggage = 20;
   const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
   const cityPrices = {
     ROMA: {
@@ -291,21 +292,30 @@ function ImageAndTextExample() {
         </Card.ImgOverlay>
       </Card>
 
-      <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Prenota un volo per {selectedCity}</Modal.Title>
+      <Modal
+        show={showModal}
+        onHide={handleModalClose}
+        className="modale-prenotazione"
+        centered
+      >
+        <Modal.Header closeButton className="corpo-modale rounded-0">
+          <Modal.Title className="text-primary mx-5 fs-4 text-center mx-auto">
+            Prenota un volo per <br /> {selectedCity}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="corpo-modale">
           <Form onSubmit={handleFormSubmit}>
             <Form.Group>
-              <Form.Label>Luogo di partenza</Form.Label>
+              <Form.Label className="text-primary fw-bold fs-5">
+                PARTENZA
+              </Form.Label>
               <Form.Control
                 as="select"
                 value={departure}
-                className="border border-primary rounded-0"
+                className="form-modale"
                 onChange={handleDepartureChange}
               >
-                <option value="">Seleziona luogo di partenza</option>
+                <option value="">Seleziona il luogo di partenza</option>
                 {cities
                   .filter((city) => city !== selectedCity)
                   .map((city) => {
@@ -327,11 +337,13 @@ function ImageAndTextExample() {
             </Form.Group>
             <div className="d-flex mt-2">
               <Form.Group>
-                <Form.Label>Data di partenza</Form.Label>
+                <Form.Label className="text-primary fw-bold fs-5">
+                  ANDATA
+                </Form.Label>
                 <DatePicker
                   selected={startDate}
                   onChange={handleDateChange}
-                  className="border border-primary rounded-0"
+                  className="form-modale"
                   dateFormat="dd/MM/yyyy"
                   minDate={new Date()}
                   maxDate={addDays(new Date(), 364)}
@@ -340,12 +352,14 @@ function ImageAndTextExample() {
                   endDate={endDate}
                 />
               </Form.Group>
-              <Form.Group className="mx-5">
-                <Form.Label>Data di ritorno</Form.Label>
+              <Form.Group className="mx-3">
+                <Form.Label className="text-primary fw-bold fs-5">
+                  RITORNO
+                </Form.Label>
                 <DatePicker
                   selected={endDate}
                   onChange={handleEndDateChange}
-                  className="border border-primary rounded-0"
+                  className="form-modale"
                   dateFormat="dd/MM/yyyy"
                   minDate={startDate ? addDays(startDate, 3) : undefined}
                   maxDate={addDays(new Date(), 365)}
@@ -356,8 +370,11 @@ function ImageAndTextExample() {
                 />
               </Form.Group>
             </div>
-            <Form.Group>
-              <Form.Label>Bagaglio</Form.Label>
+            <Form.Group className="mt-3">
+              <Form.Label className="text-primary fw-bold fs-5">
+                BAGAGLIO
+              </Form.Label>
+              <span className="mx-2 text-secondary">(+ €20)</span>
               <br />
               <Form.Check
                 inline
@@ -379,61 +396,80 @@ function ImageAndTextExample() {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="mt-3 w-100">
               Prenota
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
 
-      <Modal show={showPaymentModal} onHide={() => setShowPaymentModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Effettua il pagamento</Modal.Title>
+      <Modal
+        show={showPaymentModal}
+        onHide={() => setShowPaymentModal(false)}
+        className="modale-prenotazione"
+        centered
+      >
+        <Modal.Header closeButton className="corpo-modale rounded-0">
+          <Modal.Title className="text-primary mx-5 fs-4 text-center mx-auto">Effettua il pagamento</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="corpo-modale rounded-0">
           <Form onSubmit={handlePaymentSubmit}>
             <Form.Group controlId="formCardHolder">
-              <Form.Label>Intestatario della carta</Form.Label>
+              <Form.Label className="text-primary fw-bold fs-5">Intestatario della carta</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci il nome dell'intestatario"
                 value={cardHolder}
                 onChange={(event) => setCardHolder(event.target.value)}
+                className="form-modale rounded-0"
+
               />
             </Form.Group>
 
             <Form.Group controlId="formCardNumber">
-              <Form.Label>Numero di carta</Form.Label>
+              <Form.Label className="text-primary fw-bold fs-5 mt-3">Numero di carta</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci il numero di carta"
                 value={cardNumber}
                 onChange={(event) => setCardNumber(event.target.value)}
+                className="form-modale rounded-0"
+
               />
             </Form.Group>
+            <div className="d-flex align-items-center">
+              <Form.Group controlId="formExpirationDate">
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Form.Label
+                    style={{ marginBottom: "0.5rem" }}
+                    className="text-primary fw-bold fs-5 mt-3"                  >
+                    Data di scadenza
+                  </Form.Label>
+                  <div>
+                    <DatePicker
+                      selected={expirationDate}
+                      onChange={(date) => setExpirationDate(date)}
+                      dateFormat="MM/yyyy"
+                      showMonthYearPicker
+                      className="form-modale data-scadenza"
+                    />
+                  </div>
+                </div>
+              </Form.Group>
 
-            <Form.Group controlId="formExpirationDate">
-              <Form.Label>Data di scadenza</Form.Label>
-              <DatePicker
-                selected={expirationDate}
-                onChange={(date) => setExpirationDate(date)}
-                dateFormat="MM/yyyy"
-                showMonthYearPicker
-                className="form-control"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formCVV">
-              <Form.Label>CVV</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Inserisci il codice di sicurezza"
-                value={cvv}
-                onChange={(event) => setCVV(event.target.value)}
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
+              <Form.Group controlId="formCVV">
+                <Form.Label className="text-primary fw-bold fs-5 mt-3">CVV</Form.Label>
+                <Form.Control
+                className="mx-1 form-modale rounded-0"
+                  type="text"
+                  placeholder="Inserisci il CVV"
+                  value={cvv}
+                  onChange={(event) => setCVV(event.target.value)}
+                  
+                />
+              </Form.Group>
+            </div>
+            <Button variant="primary" type="submit" className="w-100 mt-3">
               Paga
             </Button>
           </Form>

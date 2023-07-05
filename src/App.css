@@ -6,23 +6,24 @@ body {
 
 
 .textLogo {
-font-family: 'Russo One', sans-serif;
+  font-family: 'Russo One', sans-serif;
   color: rgb(0, 98, 255) !important;
 }
+
 .title {
-font-family: 'Russo One', sans-serif;
+  font-family: 'Russo One', sans-serif;
   color: rgb(0, 98, 255) !important;
   font-size: 5em;
 }
 
 .titleHome {
-font-family: 'Russo One', sans-serif;
+  font-family: 'Russo One', sans-serif;
   color: rgb(0, 98, 255) !important;
   font-size: 3em;
 }
 
 .offcanvas-title {
-font-family: 'Russo One', sans-serif;
+  font-family: 'Russo One', sans-serif;
   color: white;
   font-size: 5em;
 }
@@ -32,8 +33,9 @@ font-family: 'Russo One', sans-serif;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.offcanvas-body, .offcanvas-header {
-  background-color:  rgb(0, 98, 255) ;
+.offcanvas-body,
+.offcanvas-header {
+  background-color: rgb(0, 98, 255);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
   border: none !important;
 
@@ -50,10 +52,12 @@ font-family: 'Russo One', sans-serif;
     right: -100px;
   }
 }
+
 .opening-page {
   position: relative;
   height: 100vh;
-  background-color: #f2f2f2; /* Colore di sfondo desiderato */
+  background-color: #f2f2f2;
+  /* Colore di sfondo desiderato */
 }
 
 .logo-image {
@@ -61,9 +65,9 @@ font-family: 'Russo One', sans-serif;
   top: 25%;
   left: 33%;
   transform: translate(-50%, -50%);
-  width: 500px; 
-  
-  
+  width: 500px;
+
+
 }
 
 .air {
@@ -74,8 +78,9 @@ font-family: 'Russo One', sans-serif;
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* Imposta l'aspect ratio del video (16:9) */
-  
+  padding-bottom: 56.25%;
+  /* Imposta l'aspect ratio del video (16:9) */
+
 }
 
 .video-container-no-controls iframe {
@@ -97,7 +102,7 @@ font-family: 'Russo One', sans-serif;
   left: 0;
   width: 100%;
   height: 100%;
-  
+
 }
 
 div.carousel-indicators {
@@ -192,9 +197,37 @@ div.carousel-indicators {
   .jumbotron {
     display: none;
   }
-  
+
 }
 
+.modale-prenotazione {
+  background-color: #4242428f !important;
+  backdrop-filter: blur(10px);
+  font-family: 'Russo One', sans-serif;
+}
+
+.corpo-modale {
+  border-radius: none !important;
+  border: 3px solid rgb(0, 98, 255);
+  outline: none !important;
+
+
+}
+
+.form-modale {
+  border: 2px solid rgb(0, 98, 255) !important;
+
+}
+
+select.form-modale {
+  border: 2px solid rgb(0, 98, 255);
+  border-radius: 0px !important;
+
+}
+
+.data-scadenza {
+  height: 40px;
+}
 
 
 .instagram-active:hover {
@@ -205,9 +238,9 @@ div.carousel-indicators {
 
 
 .list-home {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
-    font-family: 'Russo One', sans-serif;
-    border: 1px solid rgba(0, 0, 0, 0.393)!important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
+  font-family: 'Russo One', sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.393) !important;
 }
 
 .text-list:hover {

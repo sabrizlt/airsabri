@@ -25,8 +25,38 @@ function ImageAndTextExample() {
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
   const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
-
-  
+  const cityPrices = {
+    ROMA: {
+      PARIGI: 300,
+      LONDRA: 100,
+      TOKYO: 1300,
+      NEWYORK: 850
+    },
+    PARIGI: {
+      LONDRA: 200,
+      TOKYO: 1400,
+      NEWYORK: 900,
+      ROMA: 350
+    },
+    LONDRA: {
+      ROMA: 100,
+      PARIGI: 180,
+      TOKYO: 1200,
+      NEWYORK: 750,
+    },
+    TOKYO: {
+      ROMA: 1300,
+      PARIGI: 1400,
+      LONDRA: 1200,
+      NEWYORK: 1600,
+    },
+    NEWYORK: {
+      ROMA: 850,
+      PARIGI: 900,
+      LONDRA: 750,
+      TOKYO: 1600,
+    },
+  };
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -52,7 +82,7 @@ function ImageAndTextExample() {
     event.preventDefault();
 
     const generatePostoNumber = () => {
-      const randomDigit = getRandomNumber(1, 180); 
+      const randomDigit = getRandomNumber(1, 180);
       return `A${randomDigit}`;
     };
 
@@ -62,23 +92,22 @@ function ImageAndTextExample() {
 
     const generateTicketNumber = () => {
       let ticketNumber = "";
-    
+
       // Genera 3 cifre casuali
       for (let i = 0; i < 3; i++) {
         const randomDigit = getRandomNumber(0, 9);
         ticketNumber += randomDigit;
       }
-    
+
       // Genera 3 lettere casuali
       for (let i = 0; i < 3; i++) {
         const randomIndex = getRandomNumber(0, 25);
         const randomLetter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[randomIndex];
         ticketNumber += randomLetter;
       }
-    
+
       return ticketNumber;
     };
-    
 
     const ticket = {
       startDate: startDate.toISOString().substring(0, 10),
@@ -118,10 +147,18 @@ function ImageAndTextExample() {
       });
 
       if (response.ok) {
-        console.log("Biglietto inserito nel database con successo.");
+        const formattedDeparture = departure.toUpperCase().replace(/\s+/g, "_");
+        const formattedDestination = selectedCity.toUpperCase().replace(/\s+/g, "_");
+        
+        const price = cityPrices[formattedDestination][formattedDeparture];
+        
+                        
+        console.log("Biglietto inserito nel database con successo. Prezzo: " + price);
         alert(
           "Biglietto acquistato con successo. Numero Biglietto: " +
-            ticketNumber
+            ticketNumber +
+            ", Prezzo: " +
+            price
         );
         setCardHolder("");
         setCardNumber("");
@@ -267,7 +304,7 @@ function ImageAndTextExample() {
               >
                 <option value="">Seleziona luogo di partenza</option>
                 {cities
-                  .filter((city) => city !== departure) // Filter out the selected destination city
+                  .filter((city) => city !== departure) 
                   .map((city) => (
                     <option key={city} value={city}>
                       {city}
@@ -279,7 +316,7 @@ function ImageAndTextExample() {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                value="" // Aggiungi qui il valore appropriato per l'username
+                value="" 
                 className="border border-primary rounded-0"
                 disabled
               />
@@ -394,3 +431,4 @@ function ImageAndTextExample() {
 }
 
 export default ImageAndTextExample;
+

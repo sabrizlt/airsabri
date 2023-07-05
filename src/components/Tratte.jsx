@@ -25,38 +25,39 @@ function ImageAndTextExample() {
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
   const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
-  const cityPrices = {
-    ROMA: {
-      PARIGI: 300,
-      LONDRA: 100,
-      TOKYO: 1300,
-      NEWYORK: 850
-    },
-    PARIGI: {
-      LONDRA: 200,
-      TOKYO: 1400,
-      NEWYORK: 900,
-      ROMA: 350
-    },
-    LONDRA: {
-      ROMA: 100,
-      PARIGI: 180,
-      TOKYO: 1200,
-      NEWYORK: 750,
-    },
-    TOKYO: {
-      ROMA: 1300,
-      PARIGI: 1400,
-      LONDRA: 1200,
-      NEWYORK: 1600,
-    },
-    NEWYORK: {
-      ROMA: 850,
-      PARIGI: 900,
-      LONDRA: 750,
-      TOKYO: 1600,
-    },
-  };
+ const cityPrices = {
+  ROMA: {
+    PARIGI: 300,
+    LONDRA: 100,
+    TOKYO: 1300,
+    "NEW YORK": 850,
+  },
+  PARIGI: {
+    LONDRA: 200,
+    TOKYO: 1400,
+    "NEW YORK": 900,
+    ROMA: 350,
+  },
+  LONDRA: {
+    ROMA: 100,
+    PARIGI: 180,
+    TOKYO: 1200,
+    "NEW YORK": 750,
+  },
+  TOKYO: {
+    ROMA: 1300,
+    PARIGI: 1400,
+    LONDRA: 1200,
+    "NEW YORK": 1600,
+  },
+  "NEW YORK": {
+    ROMA: 850,
+    PARIGI: 900,
+    LONDRA: 750,
+    TOKYO: 1600,
+  },
+};
+
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -148,12 +149,15 @@ function ImageAndTextExample() {
 
       if (response.ok) {
         const formattedDeparture = departure.toUpperCase().replace(/\s+/g, "_");
-        const formattedDestination = selectedCity.toUpperCase().replace(/\s+/g, "_");
-        
+        const formattedDestination = selectedCity
+          .toUpperCase()
+          .replace(/\s+/g, "_");
+
         const price = cityPrices[formattedDestination][formattedDeparture];
-        
-                        
-        console.log("Biglietto inserito nel database con successo. Prezzo: " + price);
+
+        console.log(
+          "Biglietto inserito nel database con successo. Prezzo: " + price
+        );
         alert(
           "Biglietto acquistato con successo. Numero Biglietto: " +
             ticketNumber +
@@ -176,7 +180,6 @@ function ImageAndTextExample() {
       alert("Errore durante la creazione del biglietto.");
     }
   };
-
 
   return (
     <>
@@ -304,44 +307,51 @@ function ImageAndTextExample() {
               >
                 <option value="">Seleziona luogo di partenza</option>
                 {cities
-                  .filter((city) => city !== departure) 
+                  .filter((city) => city !== departure)
                   .map((city) => (
                     <option key={city} value={city}>
-                      {city}
+                      {city} -{" "}
+                      {
+                        cityPrices[selectedCity.toUpperCase()][
+                          city.toUpperCase()
+                        ]
+                      }
+                      €
                     </option>
                   ))}
               </Form.Control>
             </Form.Group>
+
             <Form.Group>
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                value="" 
+                value=""
                 className="border border-primary rounded-0"
                 disabled
               />
             </Form.Group>
             <div className="d-flex mt-2">
-            <Form.Group>
-              <Form.Label>Data di partenza</Form.Label>
-              <br />
-              <DatePicker
-                selected={startDate}
-                onChange={handleDateChange}
-                className="border border-primary rounded-0"
-                dateFormat="dd/MM/yyyy"
-              />
-            </Form.Group>
-            <Form.Group className="mx-5">
-              <Form.Label>Data di ritorno</Form.Label>
-              <br />
-              <DatePicker
-                selected={endDate}
-                onChange={handleEndDateChange}
-                className="border border-primary rounded-0"
-                dateFormat="dd/MM/yyyy"
-              />
-            </Form.Group>
+              <Form.Group>
+                <Form.Label>Data di partenza</Form.Label>
+                <br />
+                <DatePicker
+                  selected={startDate}
+                  onChange={handleDateChange}
+                  className="border border-primary rounded-0"
+                  dateFormat="dd/MM/yyyy"
+                />
+              </Form.Group>
+              <Form.Group className="mx-5">
+                <Form.Label>Data di ritorno</Form.Label>
+                <br />
+                <DatePicker
+                  selected={endDate}
+                  onChange={handleEndDateChange}
+                  className="border border-primary rounded-0"
+                  dateFormat="dd/MM/yyyy"
+                />
+              </Form.Group>
             </div>
             <Form.Group>
               <Form.Label>Bagaglio</Form.Label>
@@ -365,7 +375,7 @@ function ImageAndTextExample() {
                 onChange={handleBaggageChange}
               />
             </Form.Group>
-            
+
             <Button variant="primary" type="submit">
               Prenota
             </Button>
@@ -431,4 +441,3 @@ function ImageAndTextExample() {
 }
 
 export default ImageAndTextExample;
-

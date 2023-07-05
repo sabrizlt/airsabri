@@ -8,6 +8,7 @@ import parigi from "../IMAGE/parigi.jpeg";
 import tokyo from "../IMAGE/tokyo.jpeg";
 import londra from "../IMAGE/londra.jpeg";
 import immagine from "../IMAGE/aereo.PNG";
+import { addDays, isAfter } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
 function ImageAndTextExample() {
@@ -324,35 +325,34 @@ function ImageAndTextExample() {
                   })}
               </Form.Control>
             </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                value=""
-                className="border border-primary rounded-0"
-                disabled
-              />
-            </Form.Group>
             <div className="d-flex mt-2">
               <Form.Group>
                 <Form.Label>Data di partenza</Form.Label>
-                <br />
                 <DatePicker
                   selected={startDate}
                   onChange={handleDateChange}
                   className="border border-primary rounded-0"
                   dateFormat="dd/MM/yyyy"
+                  minDate={new Date()}
+                  maxDate={addDays(new Date(), 364)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
                 />
               </Form.Group>
               <Form.Group className="mx-5">
                 <Form.Label>Data di ritorno</Form.Label>
-                <br />
                 <DatePicker
                   selected={endDate}
                   onChange={handleEndDateChange}
                   className="border border-primary rounded-0"
                   dateFormat="dd/MM/yyyy"
+                  minDate={startDate ? addDays(startDate, 3) : undefined}
+                  maxDate={addDays(new Date(), 365)}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  disabled={!startDate}
                 />
               </Form.Group>
             </div>

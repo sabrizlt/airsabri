@@ -25,39 +25,38 @@ function ImageAndTextExample() {
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
   const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
- const cityPrices = {
-  ROMA: {
-    PARIGI: 300,
-    LONDRA: 100,
-    TOKYO: 1300,
-    "NEW YORK": 850,
-  },
-  PARIGI: {
-    LONDRA: 200,
-    TOKYO: 1400,
-    "NEW YORK": 900,
-    ROMA: 350,
-  },
-  LONDRA: {
-    ROMA: 100,
-    PARIGI: 180,
-    TOKYO: 1200,
-    "NEW YORK": 750,
-  },
-  TOKYO: {
-    ROMA: 1300,
-    PARIGI: 1400,
-    LONDRA: 1200,
-    "NEW YORK": 1600,
-  },
-  "NEW YORK": {
-    ROMA: 850,
-    PARIGI: 900,
-    LONDRA: 750,
-    TOKYO: 1600,
-  },
-};
-
+  const cityPrices = {
+    ROMA: {
+      PARIGI: 300,
+      LONDRA: 100,
+      TOKYO: 1300,
+      "NEW YORK": 850,
+    },
+    PARIGI: {
+      LONDRA: 200,
+      TOKYO: 1400,
+      "NEW YORK": 900,
+      ROMA: 350,
+    },
+    LONDRA: {
+      ROMA: 100,
+      PARIGI: 180,
+      TOKYO: 1200,
+      "NEW YORK": 750,
+    },
+    TOKYO: {
+      ROMA: 1300,
+      PARIGI: 1400,
+      LONDRA: 1200,
+      "NEW YORK": 1600,
+    },
+    "NEW YORK": {
+      ROMA: 850,
+      PARIGI: 900,
+      LONDRA: 750,
+      TOKYO: 1600,
+    },
+  };
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -307,18 +306,22 @@ function ImageAndTextExample() {
               >
                 <option value="">Seleziona luogo di partenza</option>
                 {cities
-                  .filter((city) => city !== departure)
-                  .map((city) => (
-                    <option key={city} value={city}>
-                      {city} -{" "}
-                      {
-                        cityPrices[selectedCity.toUpperCase()][
-                          city.toUpperCase()
-                        ]
-                      }
-                      €
-                    </option>
-                  ))}
+                  .filter((city) => city !== selectedCity)
+                  .map((city) => {
+                    const formattedSelectedCity = selectedCity.toUpperCase();
+                    const formattedCity = city.toUpperCase();
+                    const price =
+                      selectedCity &&
+                      city &&
+                      cityPrices[formattedSelectedCity] &&
+                      cityPrices[formattedSelectedCity][formattedCity];
+
+                    return (
+                      <option key={city} value={city}>
+                        {city} - {price ? price + "€" : ""}
+                      </option>
+                    );
+                  })}
               </Form.Control>
             </Form.Group>
 

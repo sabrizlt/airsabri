@@ -10,6 +10,8 @@ import londra from "../IMAGE/londra.jpeg";
 import immagine from "../IMAGE/aereo.PNG";
 import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
@@ -59,6 +61,7 @@ function ImageAndTextExample() {
       TOKYO: 1600,
     },
   };
+  
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -154,17 +157,17 @@ function ImageAndTextExample() {
           .toUpperCase()
           .replace(/\s+/g, "_");
 
-        const price = cityPrices[formattedDestination][formattedDeparture];
+        const basePrice = cityPrices[formattedDestination][formattedDeparture];
+        const totalPrice = baggage ? basePrice + priceBaggage : basePrice;
 
         console.log(
-          "Biglietto inserito nel database con successo. Prezzo: " + price
+          "Biglietto inserito nel database con successo. Prezzo: " + totalPrice
         );
-        alert(
-          "Biglietto acquistato con successo. Numero Biglietto: " +
-            ticketNumber +
-            ", Prezzo: " +
-            price
-        );
+
+
+        toast.success("Biglietto acquistato con successo.");
+        toast.success("Numero Biglietto: " + ticketNumber + ", Prezzo: €" + totalPrice);
+
         setCardHolder("");
         setCardNumber("");
         setExpirationDate(null);
@@ -181,6 +184,9 @@ function ImageAndTextExample() {
       alert("Errore durante la creazione del biglietto.");
     }
   };
+
+  
+  
 
   return (
     <>

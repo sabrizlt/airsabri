@@ -41,6 +41,10 @@ body {
 
 }
 
+.ticketTitle {
+  margin-top: 100px !important;
+}
+
 .air {
   position: absolute;
   right: 100%;
@@ -249,4 +253,14 @@ select.form-modale {
 
 .carousel-home {
   box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
+}
+
+.ticket-value {
+  font-family: 'Russo One', sans-serif;
+}
+
+.ticket {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
+  border: 5px solid rgb(0, 98, 255);
+
 }

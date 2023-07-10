@@ -142,7 +142,7 @@ function ImageAndTextExample() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "testprova",
+          username: "test",
           dataAndata: startDate.toISOString().substring(0, 10),
           dataRitorno: endDate.toISOString().substring(0, 10),
           partenza: departure,

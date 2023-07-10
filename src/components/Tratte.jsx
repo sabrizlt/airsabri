@@ -61,6 +61,8 @@ function ImageAndTextExample() {
       TOKYO: 1600,
     },
   };
+
+  
   
 
   const handleModalClose = () => {
@@ -140,7 +142,7 @@ function ImageAndTextExample() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "szaltni",
+          username: "testprova",
           dataAndata: startDate.toISOString().substring(0, 10),
           dataRitorno: endDate.toISOString().substring(0, 10),
           partenza: departure,

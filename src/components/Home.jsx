@@ -15,26 +15,24 @@ function Home() {
       <JumbotronHome />
       <div className="container-fluid">
         <div className="row">
-        <h1 className="text-center mt-5 titleHome fw-bold">
-              <span className="caption">GODITI LE NOSTRE METE</span>
-            </h1>
+          <h1 className="text-center mt-5 titleHome fw-bold">
+            <span className="caption">GODITI LE NOSTRE METE</span>
+          </h1>
           <HomeAsideLeft />
           <div className="col-lg-6">
-            
             <HomeCarousel />
             <h1 className="text-center mt-5 titleHome fw-bold">
               <span className="caption">SCOPRI I NOSTRI SERVIZI</span>
             </h1>
             <HomeCarousel2 />
-           
           </div>
           <HomeAsideRight />
         </div>
       </div>
       <h1 className="title fw-bold text-center">
-              <span className="caption">AGGIORNAMENTI IN CORSO</span>
-            </h1>
-            <HomeCarousel3 />
+        <span className="caption">AGGIORNAMENTI IN CORSO</span>
+      </h1>
+      <HomeCarousel3 />
       <MyFooter />
     </>
   );

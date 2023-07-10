@@ -8,6 +8,7 @@ import OpeningPage from "./components/OpeningPage";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import PaginaRivista from "./components/PaginaRivista";
+import Biglietto from "./components/Biglietto";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/Tratte" element={<PaginaTratte />} />
           <Route path="/Rivista" element={<PaginaRivista />} />
+          <Route path="/Viaggi" element={<Biglietto />} />
         </Routes>
       </Router>
       <ToastContainer />

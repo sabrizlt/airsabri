@@ -37,7 +37,7 @@ function Example() {
         
         <Offcanvas.Body>
         <Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>PREFERITI</Offcanvas.Title>
-        <Offcanvas.Title className='offcanvas-title fs-1 text-center'>I MIEI VIAGGI</Offcanvas.Title>
+        <Link to={'/Viaggi'}><Offcanvas.Title className='offcanvas-title fs-1 text-center'>I MIEI VIAGGI</Offcanvas.Title></Link>
         <Offcanvas.Title className='offcanvas-title fs-1 text-center'>OFFERTE</Offcanvas.Title>
         <Offcanvas.Title className='offcanvas-title fs-1 text-center'>AGGIORNAMENTI</Offcanvas.Title>
         <br />

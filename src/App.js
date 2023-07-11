@@ -10,11 +10,13 @@ import LoginPage from "./components/LoginPage";
 import PaginaRivista from "./components/PaginaRivista";
 import Biglietto from "./components/Biglietto";
 import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <div className="App">
+
       <Router>
         <Routes>
           <Route path="/OpeningPage" element={<OpeningPage />} />

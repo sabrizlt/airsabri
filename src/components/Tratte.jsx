@@ -10,8 +10,8 @@ import londra from "../IMAGE/londra.jpeg";
 import immagine from "../IMAGE/aereo.PNG";
 import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
@@ -28,42 +28,42 @@ function ImageAndTextExample() {
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
   const priceBaggage = 20;
-  const cities = ["New York", "Tokyo", "Roma", "Londra", "Parigi"];
+  //mese 2 uguale marzo perche partono da 0
+  const discountStartDate = new Date(2024, 2, 10); 
+  const discountEndDate = new Date(2024, 2, 30); 
+  const cities = ["NewYork", "Tokyo", "Roma", "Londra", "Parigi"];
   const cityPrices = {
     ROMA: {
       PARIGI: 300,
       LONDRA: 100,
       TOKYO: 1300,
-      "NEW YORK": 850,
+      NEWYORK: 850,
     },
     PARIGI: {
       LONDRA: 200,
       TOKYO: 1400,
-      "NEW YORK": 900,
+      NEWYORK: 900,
       ROMA: 350,
     },
     LONDRA: {
       ROMA: 100,
       PARIGI: 180,
       TOKYO: 1200,
-      "NEW YORK": 750,
+      NEWYORK: 750,
     },
     TOKYO: {
       ROMA: 1300,
       PARIGI: 1400,
       LONDRA: 1200,
-      "NEW YORK": 1600,
+      NEWYORK: 1600,
     },
-    "NEW YORK": {
+    NEWYORK: {
       ROMA: 850,
       PARIGI: 900,
       LONDRA: 750,
       TOKYO: 1600,
     },
   };
-
-  
-  
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -166,9 +166,35 @@ function ImageAndTextExample() {
           "Biglietto inserito nel database con successo. Prezzo: " + totalPrice
         );
 
+        try {
+          const basePrice = cityPrices[formattedDestination][formattedDeparture];
+          const totalPrice = baggage ? basePrice + priceBaggage : basePrice;
+          // Calcola la data di inizio e fine del viaggio come oggetti Date
+          const tripStartDate = new Date(
+            startDate.toISOString().substring(0, 10)
+          );
+          const tripEndDate = new Date(endDate.toISOString().substring(0, 10));
+          // Verifica se la data di inizio del viaggio è compresa nel periodo di sconto
+          if (
+            tripStartDate >= discountStartDate &&
+            tripStartDate <= discountEndDate
+          ) {
+            // Applica lo sconto del 20%
+            const discountedPrice = totalPrice * 0.8;
+            console.log("Prezzo scontato: " + discountedPrice);
+            toast.success("Prezzo scontato: €" + discountedPrice);
+          } else {
+            console.log("Prezzo: " + totalPrice);
+            toast.success("Prezzo: €" + totalPrice);
+          }
 
+        } catch (error) {
+          alert("Questa promo è terminata");
+        }
         toast.success("Biglietto acquistato con successo.");
-        toast.success("Numero Biglietto: " + ticketNumber + ", Prezzo: €" + totalPrice);
+        toast.success(
+          "Numero Biglietto: " + ticketNumber + ", Prezzo: €" + totalPrice
+        );
 
         setCardHolder("");
         setCardNumber("");
@@ -186,9 +212,6 @@ function ImageAndTextExample() {
       alert("Errore durante la creazione del biglietto.");
     }
   };
-
-  
-  
 
   return (
     <>
@@ -214,7 +237,7 @@ function ImageAndTextExample() {
         />
         <Card.ImgOverlay className="image-overlay">
           <Card.Title className="image-text text-light text-center fs-1 mt-5 fw-bold">
-            NEW YORK
+            NEWYORK
           </Card.Title>
         </Card.ImgOverlay>
       </Card>
@@ -418,31 +441,35 @@ function ImageAndTextExample() {
         centered
       >
         <Modal.Header closeButton className="corpo-modale rounded-0">
-          <Modal.Title className="text-primary mx-5 fs-4 text-center mx-auto">Effettua il pagamento</Modal.Title>
+          <Modal.Title className="text-primary mx-5 fs-4 text-center mx-auto">
+            Effettua il pagamento
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="corpo-modale rounded-0">
           <Form onSubmit={handlePaymentSubmit}>
             <Form.Group controlId="formCardHolder">
-              <Form.Label className="text-primary fw-bold fs-5">Intestatario della carta</Form.Label>
+              <Form.Label className="text-primary fw-bold fs-5">
+                Intestatario della carta
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci il nome dell'intestatario"
                 value={cardHolder}
                 onChange={(event) => setCardHolder(event.target.value)}
                 className="form-modale rounded-0"
-
               />
             </Form.Group>
 
             <Form.Group controlId="formCardNumber">
-              <Form.Label className="text-primary fw-bold fs-5 mt-3">Numero di carta</Form.Label>
+              <Form.Label className="text-primary fw-bold fs-5 mt-3">
+                Numero di carta
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci il numero di carta"
                 value={cardNumber}
                 onChange={(event) => setCardNumber(event.target.value)}
                 className="form-modale rounded-0"
-
               />
             </Form.Group>
             <div className="d-flex align-items-center">
@@ -450,7 +477,8 @@ function ImageAndTextExample() {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <Form.Label
                     style={{ marginBottom: "0.5rem" }}
-                    className="text-primary fw-bold fs-5 mt-3"                  >
+                    className="text-primary fw-bold fs-5 mt-3"
+                  >
                     Data di scadenza
                   </Form.Label>
                   <div>
@@ -466,14 +494,15 @@ function ImageAndTextExample() {
               </Form.Group>
 
               <Form.Group controlId="formCVV">
-                <Form.Label className="text-primary fw-bold fs-5 mt-3">CVV</Form.Label>
+                <Form.Label className="text-primary fw-bold fs-5 mt-3">
+                  CVV
+                </Form.Label>
                 <Form.Control
-                className="mx-1 form-modale rounded-0"
+                  className="mx-1 form-modale rounded-0"
                   type="text"
                   placeholder="Inserisci il CVV"
                   value={cvv}
                   onChange={(event) => setCVV(event.target.value)}
-                  
                 />
               </Form.Group>
             </div>

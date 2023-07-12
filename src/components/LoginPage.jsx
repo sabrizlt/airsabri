@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useLocalStorage } from "react-use";
+import Particle from "./Particle";
+
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +52,10 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+    <div>
+    <Particle/>
+    </div>
     <Container className="py-5">
       <Row>
         <Col xs={8} md={6} lg={5} xl={4} xxl={4} className="mb-4 login-box">
@@ -90,6 +97,7 @@ const LoginPage = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 

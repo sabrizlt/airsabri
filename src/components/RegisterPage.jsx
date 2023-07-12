@@ -2,6 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import Particle from "./Particle";
+
 
 const RegistrationPage = () => {
   const [validated, setValidated] = useState(false);
@@ -56,6 +58,10 @@ const RegistrationPage = () => {
   };
 
   return (
+    <>
+    <div>
+    <Particle/>
+    </div>
     <Container className="py-5">
       <Row>
         <Col xs={8} md={6} lg={5} xl={4} xxl={3} className="mb-4 login-box">
@@ -140,6 +146,7 @@ const RegistrationPage = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 

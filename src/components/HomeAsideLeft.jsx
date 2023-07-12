@@ -4,9 +4,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 
+
 function HomeAsideLeft() {
   const alertClicked = () => {
-    alert("Il tuo codice sconto è: YSH234");
+    alert("Il tuo codice sconto è: AIRSABRI10");
   };
   return (
     <>

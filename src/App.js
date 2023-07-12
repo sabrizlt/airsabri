@@ -10,13 +10,17 @@ import LoginPage from "./components/LoginPage";
 import PaginaRivista from "./components/PaginaRivista";
 import Biglietto from "./components/Biglietto";
 import { ToastContainer } from 'react-toastify';
+// import Particle from "./components/Particle";
 
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
+    <>
+    <div>
+    {/* <Particle/> */}
+    </div>
     <div className="App">
-
       <Router>
         <Routes>
           <Route path="/OpeningPage" element={<OpeningPage />} />
@@ -31,6 +35,7 @@ function App() {
       <ToastContainer />
 
     </div>
+    </>
   );
 }
 

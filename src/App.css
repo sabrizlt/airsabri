@@ -183,27 +183,12 @@ div.carousel-indicators {
   overflow: hidden;
 }
 
-.login-box a:hover {
-  background: rgb(0, 98, 255);
-  color: #fff;
-}
-
 .login-box a span {
   position: absolute;
   display: block;
 }
 
-@media screen and (max-width: 420px) {
 
-  .tratte-future {
-    flex-direction: column;
-  }
-
-  .jumbotron {
-    display: none;
-  }
-
-}
 
 .modale-prenotazione {
   background-color: #4242428f !important;
@@ -271,8 +256,16 @@ select.form-modale {
 }
 
 .offerte {
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, .6); */
   border: 5px solid rgb(0, 98, 255) !important;
   border-radius: 0% !important;
+
+}
+
+
+@media screen and (max-width: 420px) {
+
+  .tratte-future {
+    flex-direction: column;
+  }
 
 }

@@ -19,7 +19,7 @@ function BasicExample() {
 
   const fetchBigliettiByUsername = async (username) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/biglietti/${username}`);
+      const response = await fetch(`http://localhost:8080/api/auth/${username}`);
       if (response.ok) {
         const data = await response.json();
         setTicketData(data);
@@ -70,9 +70,8 @@ function BasicExample() {
                     bgColor="#FFFFFF"
                     fgColor="#000000"
                     level="Q"
-                    style={{ width: 80 }}
+                    style={{ width: 120 }}
                     value={biglietto.numeroBiglietto}
-                    className="mt-3 mb-4 mx-3"
                   />
                 </div>
               </ListGroup.Item>

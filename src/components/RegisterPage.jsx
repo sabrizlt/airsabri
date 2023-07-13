@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Particle from "./Particle";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const RegistrationPage = () => {
@@ -13,6 +15,7 @@ const RegistrationPage = () => {
     userName: "",
     email: "",
     password: "",
+    contactPhone: "",
   });
 
   const handleSubmit = async (event) => {
@@ -36,10 +39,10 @@ const RegistrationPage = () => {
 
       if (response.ok) {
         console.log("Registrazione avvenuta con successo");
-        alert("Registrazione avviata con successo");
+        toast.success("Registrazione avviata con successo");
       } else {
         console.log("Errore durante la registrazione " + formData);
-        alert("Errore durante la registrazione");
+        toast.error("Errore durante la registrazione");
       }
     } catch (error) {
       console.log(
@@ -104,7 +107,7 @@ const RegistrationPage = () => {
                 onChange={handleChange}
                 required
               />
-              <label>Email</label>
+              <label>@Email</label>
             </div>
             <div className="user-box">
               <input
@@ -128,7 +131,7 @@ const RegistrationPage = () => {
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
-                    className=""
+                    className="rounded-0"
                   >
                     REGISTER
                   </Button>

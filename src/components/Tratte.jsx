@@ -29,6 +29,8 @@ function ImageAndTextExample() {
   const [ticketNumber, setTicketNumber] = useState("");
   const [postoNumber, setPostoNumber] = useState("");
   const priceBaggage = 20;
+  const [discountApplied, setDiscountApplied] = useState(false);
+
   //mese 2 uguale marzo perche partono da 0
   const discountStartDate = new Date(2024, 2, 10); 
   const discountEndDate = new Date(2024, 2, 30); 
@@ -139,6 +141,9 @@ function ImageAndTextExample() {
 
 
     try {
+      const discountCode = "AIRSABRI10"; // Discount code to be applied
+    const isDiscountCodeValid = discountApplied || (loggedInUsername && loggedInUsername === discountCode);
+
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
         method: "POST",
         headers: {
@@ -177,6 +182,14 @@ function ImageAndTextExample() {
             startDate.toISOString().substring(0, 10)
           );
           const tripEndDate = new Date(endDate.toISOString().substring(0, 10));
+
+          if (isDiscountCodeValid) {
+            // Apply the discount of 10%
+            totalPrice = totalPrice * 0.9;
+            toast.info("Discount Applied! New price: €" + totalPrice);
+          } else {
+            toast.info("No discount applied. Price: €" + totalPrice);
+          }
           // Verifica se la data di inizio del viaggio è compresa nel periodo di sconto
           if (
             tripStartDate >= discountStartDate &&
@@ -185,19 +198,17 @@ function ImageAndTextExample() {
             // Applica lo sconto del 20%
             const discountedPrice = totalPrice * 0.8;
             console.log("Prezzo scontato: " + discountedPrice);
-            toast.success("Prezzo scontato: €" + discountedPrice);
+            toast.info("Numero Biglietto: " + ticketNumber + "Prezzo scontato: €" + discountedPrice);
           } else {
             console.log("Prezzo: " + totalPrice);
-            toast.success("Prezzo: €" + totalPrice);
+            toast.info("Numero Biglietto: " + ticketNumber  + " Prezzo: € " + totalPrice);
           }
 
         } catch (error) {
           alert("Questa promo è terminata");
         }
         toast.success("Biglietto acquistato con successo.");
-        toast.success(
-          "Numero Biglietto: " + ticketNumber + ", Prezzo: €" + totalPrice
-        );
+      
 
         setCardHolder("");
         setCardNumber("");

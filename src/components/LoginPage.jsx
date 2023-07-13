@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useLocalStorage } from "react-use";
 import Particle from "./Particle";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -40,9 +43,10 @@ const LoginPage = () => {
         setToken(data.accessToken);
         localStorage.setItem("username", formData.userName);
         navigate("/home");
+        toast.success("BENVENUTO: " + formData.userName)
       } else {
         console.log("Login failed");
-        alert("Username or password wrong!");
+        toast.error("L'username o la password non sono corretti!");
       }
     } catch (error) {
       console.log("An error occurred while logging in");

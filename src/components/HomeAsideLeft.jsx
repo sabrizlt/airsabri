@@ -3,6 +3,9 @@ import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 function HomeAsideLeft() {
@@ -10,7 +13,7 @@ function HomeAsideLeft() {
 
   const alertClicked = () => {
     
-    alert("Il tuo codice sconto è: AIRSABRI10");
+    toast.info("Il tuo codice sconto è: AIRSABRI10");
   };
   return (
     <>

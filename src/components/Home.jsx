@@ -6,18 +6,16 @@ import HomeCarousel2 from "./HomeCarousel2";
 import HomeCarousel3 from "./NuoveTratteHome";
 import HomeAsideLeft from "./HomeAsideLeft";
 import HomeAsideRight from "./HomeAsideRight";
-import JumbotronHome from "./JumbotronHome";
 
 function Home() {
   return (
     <>
       <MyNavbar />
-      <JumbotronHome />
       <div className="container-fluid">
         <div className="row">
-          <h1 className="text-center mt-5 titleHome fw-bold">
-            <span className="caption">GODITI LE NOSTRE METE</span>
-          </h1>
+        <h1 className="text-center titleHome ticketTitle fw-bold">
+        <span className="caption">GODITI LE NOSTRE METE</span>
+      </h1>
           <HomeAsideLeft />
           <div className="col-lg-6">
             <HomeCarousel />

@@ -11,6 +11,7 @@ import PaginaRivista from "./components/PaginaRivista";
 import Biglietto from "./components/Biglietto";
 import Aggiornamenti from "./components/Aggiornamenti";
 import Offerte from "./components/Offerte";
+import Preferiti from "./components/Preferiti";
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/Viaggi" element={<Biglietto />} />
           <Route path="/Offerte" element={<Offerte />} />
           <Route path="/Aggiornamenti" element={<Aggiornamenti />} />
+          <Route path="/Preferiti" element={<Preferiti />} />
         </Routes>
       </Router>
       <ToastContainer />

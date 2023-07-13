@@ -5,18 +5,21 @@ import MyFooter from "./MyFooter";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
-import logo from "../IMAGE/logo.png";
+import { QRCode } from "react-qr-svg";
 
 function BasicExample() {
-  const [ticketData, setTicketData] = useState(null);
+  const [ticketData, setTicketData] = useState([]);
+  const loggedInUsername = localStorage.getItem("username");
 
   useEffect(() => {
-    fetchBigliettiByUsername("test"); // Sostituisci "testprova" con il nome utente desiderato
-  }, []);
+    if (loggedInUsername) {
+      fetchBigliettiByUsername(loggedInUsername);
+    }
+  }, [loggedInUsername]);
 
-  const fetchBigliettiByUsername = async () => {
+  const fetchBigliettiByUsername = async (username) => {
     try {
-      const response = await fetch("http://localhost:8080/api/auth/test");
+      const response = await fetch(`http://localhost:8080/api/auth/biglietti/${username}`);
       if (response.ok) {
         const data = await response.json();
         setTicketData(data);
@@ -37,7 +40,7 @@ function BasicExample() {
       </h1>
 
       <div className="d-flex flex-column align-items-center">
-        {ticketData &&
+        {ticketData.length > 0 ? (
           ticketData.map((biglietto) => (
             <ListGroup
               key={biglietto.id}
@@ -62,7 +65,16 @@ function BasicExample() {
                   <p className="text-dark">Partenza: {biglietto.partenza}</p>
                   <p className="text-dark">Destinazione: {biglietto.arrivo}</p>
                 </div>
-                <img src={logo} alt="" width={"180px"} />
+                <div className="mx-3">
+                  <QRCode
+                    bgColor="#FFFFFF"
+                    fgColor="#000000"
+                    level="Q"
+                    style={{ width: 80 }}
+                    value={biglietto.numeroBiglietto}
+                    className="mt-3 mb-4 mx-3"
+                  />
+                </div>
               </ListGroup.Item>
               <ListGroup.Item className=" bg-primary rounded-0">
                 <div className="ticket-number ml-auto fw-bold d-flex justify-content-between align-content-center">
@@ -71,9 +83,14 @@ function BasicExample() {
                 </div>
               </ListGroup.Item>
             </ListGroup>
-          ))}
+          ))
+        ) : (
+          <p>Nessun biglietto disponibile.</p>
+        )}
       </div>
-      <MyFooter />
+      <div className="fixed-bottom">
+        <MyFooter />
+      </div>
     </>
   );
 }

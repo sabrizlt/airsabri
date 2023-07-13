@@ -16,17 +16,17 @@ function Example() {
   const handleShow = () => setShow(true);
 
   return (
-    <Navbar bg="light" expand="lg" className='navbar fixed-top'>
+    <Navbar expand="lg" className='navbar fixed-top'>
       <Container>
         <div className="d-flex align-items-center">
         <Navbar.Brand as={Link} to="/Home">
         <img src={LogoImage} width="80px" alt="" />
       </Navbar.Brand>
-          <Navbar.Text className='textLogo fs-2 fw-bold text-decoration-none'>AIR SABRI</Navbar.Text>
+          <Navbar.Text className='textLogo fs-2 fw-bold text-decoration-none text-light'>AIR SABRI</Navbar.Text>
         </div>
         <div className="ms-auto">
-          <Button variant="light" onClick={handleShow}>
-            <AiOutlineMenu className='fs-2 fw-bold text-primary'/>
+          <Button variant="primary" onClick={handleShow}>
+            <AiOutlineMenu className='fs-2 fw-bold text-light'/>
           </Button>
         </div>
       </Container>
@@ -36,7 +36,7 @@ function Example() {
         </Offcanvas.Header>
         
         <Offcanvas.Body>
-        <Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>PREFERITI</Offcanvas.Title>
+        <Link to={'/Preferiti'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>PREFERITI</Offcanvas.Title></Link>
         <Link to={'/Viaggi'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>I MIEI VIAGGI</Offcanvas.Title></Link>
         <Link to={'/Offerte'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>OFFERTE</Offcanvas.Title></Link>
         <Link to={'/Aggiornamenti'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>AGGIORNAMENTI</Offcanvas.Title></Link>

@@ -9,8 +9,9 @@ import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import PaginaRivista from "./components/PaginaRivista";
 import Biglietto from "./components/Biglietto";
+import Aggiornamenti from "./components/Aggiornamenti";
+import Offerte from "./components/Offerte";
 import { ToastContainer } from 'react-toastify';
-// import Particle from "./components/Particle";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +19,6 @@ function App() {
   return (
     <>
     <div>
-    {/* <Particle/> */}
     </div>
     <div className="App">
       <Router>
@@ -30,6 +30,8 @@ function App() {
           <Route path="/Tratte" element={<PaginaTratte />} />
           <Route path="/Rivista" element={<PaginaRivista />} />
           <Route path="/Viaggi" element={<Biglietto />} />
+          <Route path="/Offerte" element={<Offerte />} />
+          <Route path="/Aggiornamenti" element={<Aggiornamenti />} />
         </Routes>
       </Router>
       <ToastContainer />

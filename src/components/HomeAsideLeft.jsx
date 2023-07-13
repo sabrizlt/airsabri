@@ -6,7 +6,10 @@ import Carousel from "react-bootstrap/Carousel";
 
 
 function HomeAsideLeft() {
+  const username = localStorage.getItem("username");
+
   const alertClicked = () => {
+    
     alert("Il tuo codice sconto è: AIRSABRI10");
   };
   return (
@@ -20,7 +23,7 @@ function HomeAsideLeft() {
         >
           <ListGroup.Item className="text-center fw-bold">INFO</ListGroup.Item>
           <ListGroup.Item action href="#link1">
-            Profilo
+            {username ? username : "Profilo"}
           </ListGroup.Item>
           <Link to={"/Tratte"} className="text-decoration-none">
             <ListGroup.Item action href="#link2">

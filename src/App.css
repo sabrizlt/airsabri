@@ -265,3 +265,13 @@ select.form-modale {
 
 }
 
+.lista-offerte {
+  font-family: 'Russo One', sans-serif;
+}
+
+.offerte {
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, .6); */
+  border: 5px solid rgb(0, 98, 255) !important;
+  border-radius: 0% !important;
+
+}

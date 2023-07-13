@@ -134,6 +134,8 @@ function ImageAndTextExample() {
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
+    const loggedInUsername = localStorage.getItem("username");
+
 
     try {
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
@@ -142,7 +144,7 @@ function ImageAndTextExample() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "test",
+          username: loggedInUsername, // Use the logged-in username
           dataAndata: startDate.toISOString().substring(0, 10),
           dataRitorno: endDate.toISOString().substring(0, 10),
           partenza: departure,

@@ -38,8 +38,9 @@ const LoginPage = () => {
 
       if (response.ok) {
         let data = await response.json();
-        console.log("Login successful" + data.accessToken);
+        console.log("Login successful" + data.accessToken + formData.userName);
         setToken(data.accessToken);
+        localStorage.setItem("username", formData.userName); // Save the username in localStorage
         navigate("/home");
       } else {
         console.log("Login failed");

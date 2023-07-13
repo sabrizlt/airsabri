@@ -13,7 +13,6 @@ const RegistrationPage = () => {
     userName: "",
     email: "",
     password: "",
-    contactPhone: "",
   });
 
   const handleSubmit = async (event) => {
@@ -105,7 +104,7 @@ const RegistrationPage = () => {
                 onChange={handleChange}
                 required
               />
-              <label>@Email</label>
+              <label>Email</label>
             </div>
             <div className="user-box">
               <input
@@ -129,6 +128,7 @@ const RegistrationPage = () => {
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
+                    className=""
                   >
                     REGISTER
                   </Button>
@@ -138,7 +138,7 @@ const RegistrationPage = () => {
               </center>
             </center>
           </form>
-          <Link to="/login-page">
+          <Link to="/login-page" className="text-decoration-none">
             <div className="text-secondary text-decoration-none text-center">
               Sei già registrato? Login!
             </div>

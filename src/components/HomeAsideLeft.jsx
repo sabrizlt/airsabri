@@ -16,13 +16,13 @@ function HomeAsideLeft() {
     <>
       <div className="d-none d-lg-block col-lg-3">
         <ListGroup
-          defaultActiveKey="#link1"
           style={{ width: "14rem", position: "sticky", top: 80 }}
           className="m-5 rounded-0 list-home"
           border="light"
         >
           <ListGroup.Item className="text-center fw-bold">INFO</ListGroup.Item>
-          <ListGroup.Item action href="#link1">
+          <ListGroup.Item>
+            <span>Username: </span>
             {username ? username : "Profilo"}
           </ListGroup.Item>
           <Link to={"/Tratte"} className="text-decoration-none">
@@ -38,8 +38,8 @@ function HomeAsideLeft() {
           <ListGroup.Item action onClick={alertClicked}>
             Codice Sconto
           </ListGroup.Item>
-        </ListGroup>
-        <Carousel fade style={{ width: "14rem", position: "sticky", top: 335 }} className="m-5 rounded-0 list-home" nextIcon={null} prevIcon={null}>
+          <ListGroup.Item className="text-center fw-bold text-primary">INTERNAZIONALE</ListGroup.Item>
+          <Carousel className=" rounded-0 list-home" nextIcon={null} prevIcon={null}>
   <Carousel.Item>
     <div className="video-container video-container-no-controls">
       <iframe
@@ -64,6 +64,8 @@ function HomeAsideLeft() {
   </Carousel.Item>
 </Carousel>
 
+        </ListGroup>
+        
       </div>
     </>
   );

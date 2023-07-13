@@ -9,14 +9,16 @@ function OpeningPage() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigate('/register-page');
-    }, 8000); // 3 secondi
+      navigate('/login-page');
+    }, 6000); 
 
     return () => clearTimeout(timeout);
   }, [navigate]);
 
   return (
+    <>
     <img src={LogoImage} alt="" width={'500px'} className="logo-image animate__animated animate__bounce animate__delay-2s" />
+    </>
   );
 }
 

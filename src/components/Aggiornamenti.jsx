@@ -44,8 +44,7 @@ function BasicExample() {
         <Card.Body>
           <Card.Title className="text-center">Napoli</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+          Un viaggio a Napoli ti condurrà in un incantevole labirinto di strade tortuose, ricche di storia e di vivaci colori. 
           </Card.Text>
         </Card.Body>
       </Card>

@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import { FiLogOut } from "react-icons/fi";
+
+
 
 
 
@@ -56,8 +59,8 @@ function Example() {
         <br />
         <br />
         <br />
-        <Offcanvas.Title className='offcanvas-title fs-4'><Link to={'/login-page'} className='text-light text-decoration-none'>LOGIN</Link></Offcanvas.Title>
-        <Offcanvas.Title className='offcanvas-title fs-4'><Link to={'/register-page'} className='text-light text-decoration-none'>REGISTER</Link></Offcanvas.Title>
+        <br />
+        <Offcanvas.Title className='offcanvas-title fs-4'><Link to={'/login-page'} className='text-light text-decoration-none'><FiLogOut className='me-3 mb-1 fs-3'/>LOG OUT</Link></Offcanvas.Title>
         </Offcanvas.Body>
       </Offcanvas>
     </Navbar>

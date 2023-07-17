@@ -13,7 +13,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -32,8 +31,8 @@ function ImageAndTextExample() {
   const [discountApplied, setDiscountApplied] = useState(false);
 
   //mese 2 uguale marzo perche partono da 0
-  const discountStartDate = new Date(2024, 2, 10); 
-  const discountEndDate = new Date(2024, 2, 30); 
+  const discountStartDate = new Date(2024, 2, 10);
+  const discountEndDate = new Date(2024, 2, 30);
   const cities = ["NewYork", "Tokyo", "Roma", "Londra", "Parigi"];
   const cityPrices = {
     ROMA: {
@@ -139,10 +138,11 @@ function ImageAndTextExample() {
     event.preventDefault();
     const loggedInUsername = localStorage.getItem("username");
 
-
     try {
       const discountCode = "AIRSABRI10"; // Discount code to be applied
-    const isDiscountCodeValid = discountApplied || (loggedInUsername && loggedInUsername === discountCode);
+      const isDiscountCodeValid =
+        discountApplied ||
+        (loggedInUsername && loggedInUsername === discountCode);
 
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
         method: "POST",
@@ -175,7 +175,8 @@ function ImageAndTextExample() {
         );
 
         try {
-          const basePrice = cityPrices[formattedDestination][formattedDeparture];
+          const basePrice =
+            cityPrices[formattedDestination][formattedDeparture];
           const totalPrice = baggage ? basePrice + priceBaggage : basePrice;
           // Calcola la data di inizio e fine del viaggio come oggetti Date
           const tripStartDate = new Date(
@@ -198,17 +199,22 @@ function ImageAndTextExample() {
             // Applica lo sconto del 20%
             const discountedPrice = totalPrice * 0.8;
             console.log("Prezzo scontato: " + discountedPrice);
-            toast.info("Numero Biglietto: " + ticketNumber + "Prezzo scontato: €" + discountedPrice);
+            toast.info(
+              "Numero Biglietto: " +
+                ticketNumber +
+                "Prezzo scontato: €" +
+                discountedPrice
+            );
           } else {
             console.log("Prezzo: " + totalPrice);
-            toast.info("Numero Biglietto: " + ticketNumber  + " Prezzo: € " + totalPrice);
+            toast.info(
+              "Numero Biglietto: " + ticketNumber + " Prezzo: € " + totalPrice
+            );
           }
-
         } catch (error) {
           alert("Questa promo è terminata");
         }
         toast.success("Biglietto acquistato con successo.");
-      
 
         setCardHolder("");
         setCardNumber("");
@@ -239,7 +245,7 @@ function ImageAndTextExample() {
       <Card
         className="w-75 mx-auto mt-5 tratteCard"
         onClick={() => {
-          setSelectedCity("NEW YORK");
+          setSelectedCity("NEWYORK");
           setShowModal(true);
         }}
       >
@@ -362,21 +368,29 @@ function ImageAndTextExample() {
               >
                 <option value="">Seleziona il luogo di partenza</option>
                 {cities
-                  .filter((city) => city !== selectedCity)
+                  .filter((city) => city !== selectedCity) 
                   .map((city) => {
-                    const formattedSelectedCity = selectedCity.toUpperCase();
-                    const formattedCity = city.toUpperCase();
+                    const formattedSelectedCity = selectedCity
+                      .toUpperCase()
+                      .replace(/\s+/g, "");
+                    const formattedCity = city
+                      .toUpperCase()
+                      .replace(/\s+/g, "");
                     const price =
-                      selectedCity &&
-                      city &&
+                      formattedSelectedCity &&
+                      formattedCity &&
                       cityPrices[formattedSelectedCity] &&
                       cityPrices[formattedSelectedCity][formattedCity];
 
-                    return (
-                      <option key={city} value={city}>
-                        {city} - {price ? price + "€" : ""}
-                      </option>
-                    );
+                    if (price) {
+                      return (
+                        <option key={city} value={city}>
+                          {city} - {price}€
+                        </option>
+                      );
+                    } else {
+                      return null; // Nascondi la città senza prezzo
+                    }
                   })}
               </Form.Control>
             </Form.Group>
@@ -443,6 +457,9 @@ function ImageAndTextExample() {
 
             <Button variant="primary" type="submit" className="mt-3 w-100">
               Prenota
+            </Button>
+            <Button variant="success" type="submit" className="mt-3 w-100">
+              Preferiti
             </Button>
           </Form>
         </Modal.Body>

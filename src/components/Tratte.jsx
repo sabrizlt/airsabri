@@ -458,9 +458,6 @@ function ImageAndTextExample() {
             <Button variant="primary" type="submit" className="mt-3 w-100">
               Prenota
             </Button>
-            <Button variant="success" type="submit" className="mt-3 w-100">
-              Preferiti
-            </Button>
           </Form>
         </Modal.Body>
       </Modal>

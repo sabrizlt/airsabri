@@ -38,7 +38,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={napoli} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -54,7 +54,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={catania} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -72,7 +72,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={firenze} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -90,7 +90,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={milano} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -112,7 +112,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={praga} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -129,7 +129,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={budapest} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -147,7 +147,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={berlino} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -165,7 +165,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={barcellona} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -187,7 +187,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={dubai} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -205,7 +205,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={buenosaires} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -222,7 +222,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={singapore} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>
@@ -240,7 +240,7 @@ function BasicExample() {
           boxShadow: "0 10px 20px rgba(0, 0, 0, .6)",
           border: "none",
         }}
-        className="m-5 rounded-0"
+        className="m-5 rounded-0 aggiornamento"
       >
         <Card.Img variant="top" src={ilcairo} className="rounded-0" style={{height: '200px'}}/>
         <Card.Body>

@@ -13,6 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -29,7 +30,6 @@ function ImageAndTextExample() {
   const [postoNumber, setPostoNumber] = useState("");
   const priceBaggage = 20;
   const [discountApplied, setDiscountApplied] = useState(false);
-
   //mese 2 uguale marzo perche partono da 0
   const discountStartDate = new Date(2024, 2, 10);
   const discountEndDate = new Date(2024, 2, 30);

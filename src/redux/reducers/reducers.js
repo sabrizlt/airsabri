@@ -1,26 +1,20 @@
-// reducers.js
+// reducer.js
+import { ADD_TO_FAVORITES } from "./actions";
 
 const initialState = {
   favorites: [],
 };
 
-const favoritesReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_FAVORITES":
+    case ADD_TO_FAVORITES:
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
-      };
-    case "REMOVE_FROM_FAVORITES":
-      return {
-        ...state,
-        favorites: state.favorites.filter(
-          (ticket) => ticket.ticketNumber !== action.payload
-        ),
       };
     default:
       return state;
   }
 };
 
-export default favoritesReducer;
+export default reducer;

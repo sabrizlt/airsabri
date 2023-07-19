@@ -34,11 +34,11 @@ function Example() {
         </div>
       </Container>
 
-      <Offcanvas show={show} onHide={handleClose} placement='end'>
+      <Offcanvas show={show} onHide={handleClose} placement='end' className='canvas'>
         <Offcanvas.Header closeButton>
         </Offcanvas.Header>
         
-        <Offcanvas.Body>
+        <Offcanvas.Body >
         <Link to={'/Preferiti'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>PREFERITI</Offcanvas.Title></Link>
         <Link to={'/Viaggi'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>I MIEI VIAGGI</Offcanvas.Title></Link>
         <Link to={'/Offerte'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>OFFERTE</Offcanvas.Title></Link>

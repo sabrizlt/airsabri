@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
-#root{
+#root {
   font-family: 'Russo One', sans-serif;
 }
 
@@ -185,6 +185,14 @@ div.carousel-indicators {
 }
 
 
+.footer-mobile {
+  height: 80px;
+}
+
+.icon {
+  font-size: 2.5em;
+}
+
 
 .modale-prenotazione {
   background-color: #4242428f !important;
@@ -244,7 +252,6 @@ select.form-modale {
 .ticket {
   box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
   border: 5px solid rgb(0, 98, 255);
-
 }
 
 .lista-offerte {
@@ -269,24 +276,57 @@ select.form-modale {
 
   .aggiornamento {
     width: 100% !important;
-    margin-right: 20px !important;
+    margin-right: 25px !important;
   }
 
   .navbar {
-    height: 100px !important;
+    height: 70px !important;
   }
 
   .canvas {
     width: 100% !important;
   }
 
-  h1, h2 {
-    font-size: 1.5em !important;
+  h1 {
+    font-size: 1.8em !important;
+    margin-top: 30px;
   }
 
   h2 {
+    margin-top: -50px !important;
+    font-size: 1.5em !important;
     margin: none !important;
     padding: none !important;
+  }
+
+  .ticket-body {
+    width: 900px !important;
+    margin-left: -230px !important;
+  }
+
+  .text-navbar {
+    display: none;
+  }
+
+  .offcanvas-title {
+    margin-top: 80px !important;
+    font-size: 1.2em !important;
+  }
+
+  .logout {
+    display: none;
+  }
+
+  .form-andata-ritorno {
+    flex-direction: column;
+    margin-top: 20px !important;
+  }
+
+  .form-andata {
+    margin-top: 20px !important;
+  }
+  .form-ritorno {
+    margin-top: 20px !important;
   }
 
 }
@@ -295,4 +335,5 @@ select.form-modale {
   .footer-mobile {
     display: none;
   }
+
 }

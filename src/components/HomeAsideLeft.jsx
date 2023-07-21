@@ -1,20 +1,21 @@
-// HomeAsideLeft.js
-import React from "react";
+import React, { useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 function HomeAsideLeft() {
   const username = localStorage.getItem("username");
+  const [isCodeUsed, setIsCodeUsed] = useState(false);
 
-  const alertClicked = () => {
-    
-    toast.info("Il tuo codice sconto è: AIRSABRI10");
+  const handleCodeClick = () => {
+    if (!isCodeUsed) {
+      toast.info("Il tuo codice sconto è: AIRSABRI10");
+      setIsCodeUsed(true);
+    }
   };
+
   return (
     <>
       <div className="d-none d-lg-block col-lg-3">
@@ -38,7 +39,7 @@ function HomeAsideLeft() {
               Rivista di bordo
             </ListGroup.Item>
           </Link>
-          <ListGroup.Item action onClick={alertClicked}>
+          <ListGroup.Item action onClick={handleCodeClick} disabled={isCodeUsed}>
             Codice Sconto
           </ListGroup.Item>
           <ListGroup.Item className="text-center fw-bold text-primary">INTERNAZIONALE</ListGroup.Item>

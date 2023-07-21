@@ -23,7 +23,7 @@ function Example() {
       <Container>
         <div className="d-flex align-items-center">
         <Navbar.Brand as={Link} to="/Home">
-        <img src={LogoImage} width="80px" alt="" />
+        <img src={LogoImage} className='text-navbar' width="80px" alt="" />
       </Navbar.Brand>
           <Navbar.Text className='textLogo fs-2 fw-bold text-decoration-none text-light'>AIR SABRI</Navbar.Text>
         </div>
@@ -39,7 +39,7 @@ function Example() {
         </Offcanvas.Header>
         
         <Offcanvas.Body >
-        <Link to={'/Mappa-delle-rotte'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>MAPPA</Offcanvas.Title></Link>
+        <Link to={'/Mappa-delle-rotte'} className='text-decoration-none offcanvas-title'><Offcanvas.Title className='offcanvas-title fs-1 text-center mt-5'>MAPPA</Offcanvas.Title></Link>
         <Link to={'/Viaggi'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>I MIEI VIAGGI</Offcanvas.Title></Link>
         <Link to={'/Offerte'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>OFFERTE</Offcanvas.Title></Link>
         <Link to={'/Aggiornamenti'} className='text-decoration-none'><Offcanvas.Title className='offcanvas-title fs-1 text-center'>AGGIORNAMENTI</Offcanvas.Title></Link>
@@ -50,16 +50,16 @@ function Example() {
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
+        <br className='logout' />
         <Offcanvas.Title className='offcanvas-title fs-4'><Link to={'/login-page'} className='text-light text-decoration-none'><FiLogOut className='me-3 mb-1 fs-3'/>LOG OUT</Link></Offcanvas.Title>
         </Offcanvas.Body>
       </Offcanvas>

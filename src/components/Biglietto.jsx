@@ -39,7 +39,7 @@ function BasicExample() {
         <span className="caption">BIGLIETTI</span>
       </h1>
 
-      <div className="d-flex flex-column align-items-center mb-5">
+      <div className="d-flex flex-column align-items-center mb-5 ticket-body">
         {ticketData.length > 0 ? (
           ticketData.map((biglietto) => (
             <ListGroup

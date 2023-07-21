@@ -13,7 +13,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function ImageAndTextExample() {
   const [showModal, setShowModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -30,6 +29,7 @@ function ImageAndTextExample() {
   const [postoNumber, setPostoNumber] = useState("");
   const priceBaggage = 20;
   const [discountApplied, setDiscountApplied] = useState(false);
+  const [isCodeUsed, setIsCodeUsed] = useState(false);
   //mese 2 uguale marzo perche partono da 0
   const discountStartDate = new Date(2024, 2, 10);
   const discountEndDate = new Date(2024, 2, 30);
@@ -66,6 +66,26 @@ function ImageAndTextExample() {
       TOKYO: 1600,
     },
   };
+
+  const applyDiscountCode = (code) => {
+    localStorage.setItem("discountCode", code);
+  };
+  
+  const hasAppliedDiscount = () => {
+    const discountCode = localStorage.getItem("discountCode");
+    return discountCode === "AIRSABRI10"; 
+  };
+  
+  const handleCodeClick = () => {
+    if (!hasAppliedDiscount()) {
+      toast.info("Il tuo codice sconto è: AIRSABRI10");
+      setIsCodeUsed(true);
+      applyDiscountCode("AIRSABRI10");
+    } else {
+      toast.info("Hai già utilizzato il codice sconto.");
+    }
+  };
+  
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -138,11 +158,23 @@ function ImageAndTextExample() {
     event.preventDefault();
     const loggedInUsername = localStorage.getItem("username");
 
+    if (!/^\d{16}$/.test(cardNumber)) {
+      toast.error("Il numero di carta deve contenere esattamente 16 cifre.");
+      return;
+    }
+
+    if (!/^\d{3}$/.test(cvv)) {
+      toast.error("Il CVV deve contenere esattamente 3 cifre.");
+      return;
+    }
+
     try {
-      const discountCode = "AIRSABRI10"; // Discount code to be applied
+      const discountCode = "AIRSABRI10";
       const isDiscountCodeValid =
         discountApplied ||
         (loggedInUsername && loggedInUsername === discountCode);
+        
+       
 
       const response = await fetch("http://localhost:8080/api/auth/biglietti", {
         method: "POST",
@@ -150,7 +182,7 @@ function ImageAndTextExample() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: loggedInUsername, // Use the logged-in username
+          username: loggedInUsername, 
           dataAndata: startDate.toISOString().substring(0, 10),
           dataRitorno: endDate.toISOString().substring(0, 10),
           partenza: departure,
@@ -185,13 +217,11 @@ function ImageAndTextExample() {
           const tripEndDate = new Date(endDate.toISOString().substring(0, 10));
 
           if (isDiscountCodeValid) {
-            // Apply the discount of 10%
             totalPrice = totalPrice * 0.9;
             toast.info("Discount Applied! New price: €" + totalPrice);
           } else {
-            toast.info("No discount applied. Price: €" + totalPrice);
+            console.log("No discount applied. Price: €" + totalPrice);
           }
-          // Verifica se la data di inizio del viaggio è compresa nel periodo di sconto
           if (
             tripStartDate >= discountStartDate &&
             tripStartDate <= discountEndDate
@@ -368,7 +398,7 @@ function ImageAndTextExample() {
               >
                 <option value="">Seleziona il luogo di partenza</option>
                 {cities
-                  .filter((city) => city !== selectedCity) 
+                  .filter((city) => city !== selectedCity)
                   .map((city) => {
                     const formattedSelectedCity = selectedCity
                       .toUpperCase()
@@ -394,8 +424,8 @@ function ImageAndTextExample() {
                   })}
               </Form.Control>
             </Form.Group>
-            <div className="d-flex mt-2">
-              <Form.Group>
+            <div className="d-flex mt-2 form-andata-ritorno">
+              <Form.Group className="form-andata">
                 <Form.Label className="text-primary fw-bold fs-5">
                   ANDATA
                 </Form.Label>
@@ -405,13 +435,13 @@ function ImageAndTextExample() {
                   className="form-modale"
                   dateFormat="dd/MM/yyyy"
                   minDate={new Date()}
-                  maxDate={addDays(new Date(), 364)}
+                  maxDate={addDays(new Date(), 365)}
                   selectsStart
                   startDate={startDate}
                   endDate={endDate}
                 />
               </Form.Group>
-              <Form.Group className="mx-3">
+              <Form.Group className="mx-3 form-ritorno">
                 <Form.Label className="text-primary fw-bold fs-5">
                   RITORNO
                 </Form.Label>
@@ -454,6 +484,10 @@ function ImageAndTextExample() {
                 onChange={handleBaggageChange}
               />
             </Form.Group>
+
+            <Form.Group action onClick={handleCodeClick} disabled={isCodeUsed}>
+      Codice Sconto
+    </Form.Group>
 
             <Button variant="primary" type="submit" className="mt-3 w-100">
               Prenota
@@ -498,8 +532,11 @@ function ImageAndTextExample() {
                 value={cardNumber}
                 onChange={(event) => setCardNumber(event.target.value)}
                 className="form-modale rounded-0"
+                pattern="[0-9]{16}" // Add the pattern attribute to enforce 16 numeric characters
+                title="Card number must be exactly 16 digits" // Optional: Add a title attribute to display a custom error message
               />
             </Form.Group>
+
             <div className="d-flex align-items-center">
               <Form.Group controlId="formExpirationDate">
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -531,6 +568,8 @@ function ImageAndTextExample() {
                   placeholder="Inserisci il CVV"
                   value={cvv}
                   onChange={(event) => setCVV(event.target.value)}
+                  pattern="[0-9]{3}"
+                  title="CVV must be exactly 3 digits"
                 />
               </Form.Group>
             </div>

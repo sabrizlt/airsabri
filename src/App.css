@@ -329,6 +329,12 @@ select.form-modale {
     margin-top: 20px !important;
   }
 
+  .logo-image {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
 }
 
 @media screen and (min-width: 721px) {

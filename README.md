@@ -26,6 +26,21 @@ Si puo trovare la repository backend direttamente qui.
 https://github.com/sabrizlt/Air_Sabri_service
 
 
+## Tech Stack
+
+**Client:** React, Bootstrap, Javascript, CSS
+
+[![My Skills](https://skillicons.dev/icons?i=react,js,bootstrap,css )](https://skillicons.dev)
+
+**Server:** Java, Hibernate, Spring, Postgresql
+
+[![My Skills](https://skillicons.dev/icons?i=java,hibernate,spring,postgresql )](https://skillicons.dev)
+
+**IDE:** Visual Studio Code, Eclipse, Postman, PgAdmin
+
+[![My Skills](https://skillicons.dev/icons?i=vscode,eclipse,postman,postgresql )](https://skillicons.dev)
+
+
 ## SCREENSHOT
 
 ## Pagina Home
@@ -48,16 +63,3 @@ https://github.com/sabrizlt/Air_Sabri_service
 ![App Screenshot](https://github.com/sabrizlt/airsabri/blob/main/src/IMAGE/Screenshot%202023-07-25%20alle%2014.10.35.png?raw=true)
 
 
-## Tech Stack
-
-**Client:** React, Bootstrap, Javascript, CSS
-
-[![My Skills](https://skillicons.dev/icons?i=react,js,bootstrap,css )](https://skillicons.dev)
-
-**Server:** Java, Hibernate, Spring, Postgresql
-
-[![My Skills](https://skillicons.dev/icons?i=java,hibernate,spring,postgresql )](https://skillicons.dev)
-
-**IDE:** Visual Studio Code, Eclipse, Postman, PgAdmin
-
-[![My Skills](https://skillicons.dev/icons?i=vscode,eclipse,postman,postgresql )](https://skillicons.dev)
